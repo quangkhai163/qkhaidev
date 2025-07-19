@@ -1,47 +1,97 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bóc Phốt Lớp 9B</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>tha loi cho khai nhennn?</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #ff3399;
+      font-size: 28px;
+    }
+
+    .image {
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 30px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #66ff99;
+    }
+
+    #noBtn {
+      background-color: #ff6666;
+      position: relative;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body>
+  <div class="image">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWZvaXR6a2VrMGk1a3g3cGE3NGR4dTVraWI5M3U1b2MycnZta3R6eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g9582DNuQppxC/giphy.gif" width="150">
+  </div>
+  <h1>Cậu có thích tớ không ??</h1>
 
-  <header class="bg-red-600 text-white text-center p-6 shadow-md">
-    <h1 class="text-4xl font-bold">🔥 Bóc Phốt Lớp 9B 🔥</h1>
-    <p class="mt-2 text-lg">Tổng hợp drama, trò con bò và những bí mật chưa từng hé lộ</p>
-  </header>
+  <div class="button-group">
+    <button id="yesBtn">💖 Có 💖</button>
+    <button id="noBtn">❌ Không ❌</button>
+  </div>
 
-  <main class="p-6 max-w-5xl mx-auto space-y-6">
-    
-    <!-- Thẻ phốt -->
-    <div class="bg-white p-5 rounded-2xl shadow-lg border-l-4 border-red-500">
-      <h2 class="text-xl font-semibold text-red-700">📌 Phốt 1: lớp có 1 th 6677 biệt danh mạnh chuyet</h2>
-      <p class="text-gray-700 mt-2">th này bản tính thích si đị với gái nhà coi phim sex bị bắt quay quay tưởng mình vô tội hoá ra mik la ng cs tội
-      
-      học thì óc chó và hay ra vẻ ngầu lòi đĩ cha m</p>
-      <p class="text-sm text-gray-500 mt-1">Ngày đăng: 19/07/2025</p>
-    </div>
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
-    <div class="bg-white p-5 rounded-2xl shadow-lg border-l-4 border-yellow-500">
-      <h2 class="text-xl font-semibold text-yellow-700">📌 Phốt 2: th đĩ thương quan hệ với mẹ</h2>
-      <p class="text-gray-700 mt-2">coi phim sex nhiweuf hơn mạnh vì 2 th do là ae họ bản tính đéo khác ai hút thuốc cha ném chai bia vẫn k trừa
-      phim sex coi k ngỉ hay đị chó</p>
-      <p class="text-sm text-gray-500 mt-1">Ngày đăng: 18/07/2025</p>
-    </div>
+    const begMessages = [
+      "Đừng từ chối mà... Tớ buồn đó 😢",
+      "Cậu dễ thương lắm luôn á 🥺 Cho tớ 1 cơ hội nha!",
+      "Thật sự to biet loi roi ma💕",
+      "Đừng lạnh lùng thế mà 😭",
+      "Cho tớ 1 lần được bên cậu thôi 😖",
+      "Không à? Nhưng to biet loi roi maa 🥹",
+      "Hic, đừng phũ phàng vậy chớ 😓",
+      "Cậu bấm nhầm đúng không? 😳"
+    ];
 
-    <div class="bg-white p-5 rounded-2xl shadow-lg border-l-4 border-blue-500">
-      <h2 class="text-xl font-semibold text-blue-700">📌 Phốt 3: th lồn thái dúi</h2>
-      <p class="text-gray-700 mt-2">th này có sở thích si đị vs mấy e gái yêu bị trap ngu lồn hết phần thiên hạ</p>
-      <p class="text-sm text-gray-500 mt-1">Ngày đăng: 17/07/2025</p>
-    </div>
+    yesBtn.onclick = () => {
+      alert("hì hì hog co lan sau đâuuu 💖 !");
+    }
 
-  </main>
+    noBtn.onclick = () => {
+      const msg = begMessages[Math.floor(Math.random() * begMessages.length)];
+      alert(msg);
 
-  <footer class="text-center text-gray-500 text-sm p-4 mt-10">
-    © 2025 Made for Hwang Siyeong – qkhaiDevloper
-  </footer>
+      // Làm nút No khó bấm hơn
+      const x = Math.random() * window.innerWidth * 0.6;
+      const y = Math.random() * window.innerHeight * 0.6;
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
 
+    noBtn.onmouseover = () => {
+      const x = Math.random() * window.innerWidth * 0.6;
+      const y = Math.random() * window.innerHeight * 0.6;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+  </script>
 </body>
 </html>
