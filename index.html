@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool Buff Team Free Fire</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #3e3e60);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #00ffe7;
+      margin-bottom: 10px;
+    }
+    textarea, select, button {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #00ffe7;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .result {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Tool Buff Team Free Fire</h1>
+  <p>Nhập UID cần buff:</p>
+  <textarea id="uidList" rows="5" placeholder="Ví dụ: 8090748160"></textarea>
+
+  <p>Chọn team để buff:</p>
+  <select id="teamSelect">
+    <option value="5" selected>Team 5</option>
+  </select>
+
+  <br>
+  <button onclick="buffUIDs()">🚀 Bắt đầu Buff</button>
+
+  <div class="result" id="resultBox" style="display:none"></div>
+
+  <script>
+    async function buffUIDs() {
+      const uidInput = document.getElementById("uidList").value.trim();
+      const team = document.getElementById("teamSelect").value;
+      const resultBox = document.getElementById("resultBox");
+
+      if (!uidInput) {
+        alert("Vui lòng nhập ít nhất 1 UID!");
+        return;
+      }
+
+      const uids = uidInput
+        .split(/[\n,]+/)
+        .map(uid => uid.trim())
+        .filter(uid => uid.length > 0);
+
+      resultBox.innerText = "⏳ Đang tiến hành buff...";
+      resultBox.style.display = "block";
+
+      let results = "";
+
+      for (const uid of uids) {
+        try {
+          const res = await fetch(`https://team-5-6ayavippro.vercel.app/teamsquads?team=${team}&uid=${uid}`);
+          const data = await res.json();
+
+          if (data.status === 1) {
+            results += `✅ UID: ${data.uid}\n👤 Nickname: ${data.nickname || "Không rõ"}\n📥 Đã buff vào Team ${team} thành công!\n\n`;
+          } else {
+            results += `❌ UID: ${uid} → Buff thất bại!\n🔎 Lý do: ${data.message || "Không rõ"}\n\n`;
+          }
+        } catch (e) {
+          results += `⚠️ UID: ${uid} → Lỗi API: ${e.message}\n\n`;
+        }
+      }
+
+      resultBox.innerText = results;
+    }
+  </script>
+</body>
+</html>
