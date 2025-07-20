@@ -1,20 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Tool Buff Team Free Fire</title>
+  <title>Tool Buff Team Free Fire By quang khải</title>
   <style>
     body {
-      background: linear-gradient(135deg, #1e1e2f, #3e3e60);
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
       padding: 30px;
       text-align: center;
     }
     h1 {
-      color: #00ffe7;
-      margin-bottom: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 4s linear infinite;
+    }
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
     }
     textarea, select, button {
       width: 90%;
@@ -26,10 +33,14 @@
       font-size: 16px;
     }
     button {
-      background: #00ffe7;
+      background: linear-gradient(to right, #00fff7, #00ff87);
       color: #000;
       font-weight: bold;
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
     }
     .result {
       background: rgba(255, 255, 255, 0.1);
@@ -41,6 +52,11 @@
       margin-right: auto;
       text-align: left;
       white-space: pre-line;
+    }
+    .loading {
+      font-family: monospace;
+      color: #00ffe7;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -57,6 +73,7 @@
   <br>
   <button onclick="buffUIDs()">🚀 Bắt đầu Buff</button>
 
+  <div class="loading" id="typingEffect" style="display:none;">Đang buff UID...</div>
   <div class="result" id="resultBox" style="display:none"></div>
 
   <script>
@@ -64,6 +81,7 @@
       const uidInput = document.getElementById("uidList").value.trim();
       const team = document.getElementById("teamSelect").value;
       const resultBox = document.getElementById("resultBox");
+      const typingEffect = document.getElementById("typingEffect");
 
       if (!uidInput) {
         alert("Vui lòng nhập ít nhất 1 UID!");
@@ -71,13 +89,13 @@
       }
 
       const uids = uidInput
-        .split(/[
-,]+/)
+        .split(/[\n,]+/)
         .map(uid => uid.trim())
         .filter(uid => uid.length > 0);
 
-      resultBox.innerText = "⏳ Đang tiến hành buff...";
       resultBox.style.display = "block";
+      resultBox.innerText = "";
+      typingEffect.style.display = "block";
 
       let results = "";
 
@@ -101,8 +119,11 @@
         } catch (e) {
           results += `❌ UID: ${uid} → Không thể kết nối API (có thể do CORS hoặc mạng)\nLỗi: ${e.message}\n\n`;
         }
+
+        await new Promise(resolve => setTimeout(resolve, 300));
       }
 
+      typingEffect.style.display = "none";
       resultBox.innerText = results;
     }
   </script>
